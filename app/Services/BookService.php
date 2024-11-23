@@ -31,6 +31,35 @@ class BookService
     }
 
     /**
+     * Detect intent of the query: 'find', 'count', or 'general_info'.
+     *
+     * @param string $query
+     * @return string
+     */
+    public function detectBookIntent(string $query): string
+    {
+        $queryLower = strtolower(trim($query));
+
+        // Check for "general information" queries
+        if (preg_match('/\b(which books do you have|what books are available|tell me about your books)\b/', $queryLower)) {
+            return 'general_info';
+        }
+
+        // Check for counting intent
+        if (preg_match('/\bhow many\b|\bcount\b/', $queryLower)) {
+            return 'count';
+        }
+
+        // Check for finding intent
+        if (preg_match('/\blist\b|\bshow\b|\bfind\b|\bwhat are\b|\bwhich\b/', $queryLower)) {
+            return 'find';
+        }
+
+        // Default to 'general_info' if no specific keywords are detected
+        return 'find';
+    }
+
+    /**
      * Apply filters to the dataset of books.
      *
      * @param array $books

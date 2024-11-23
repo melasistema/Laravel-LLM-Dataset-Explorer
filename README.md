@@ -5,7 +5,7 @@
 
 Welcome to the **Laravel LLM Dataset Explorer with Gemini AI**! This project demonstrates how you can leverage the power of **Large Language Models (LLMs)**, specifically **Gemini AI**, to **interact with datasets in a natural, conversational way**. By combining **Laravel**, **Gemini AI**, and **CoreNLP**, we enable intelligent querying and dynamic responses from structured data (such as a book dataset).
 
-This project showcases how LLMs can **transform structured datasets** into interactive experiences where users can **query** and **explore** data via **natural language**—just like chatting with a human. Whether you're interacting with books, movies, or any other dataset, this is an example of how **AI** and **data** converge to create powerful conversational tools.
+This project showcases how LLMs can **transform structured datasets** into interactive experiences where users can **query** and **explore** data via **natural language**—just like chatting with a human. Whether you're interacting with books, movies, or any other dataset, this is an example approach of how **AI** and **data** can converge to create powerful conversational tools.
 
 ## 📌 Features
 
@@ -43,7 +43,15 @@ Make sure to set the following variables in your `.env` file:
 -   `GEMINI_BASE_URL`: The base URL for the **Gemini API**.
 -   `GEMINI_REQUEST_TIMEOUT`: Request timeout for the Gemini API (in seconds).
 
-### 4. Run Migrations
+### 4. Start the Development Environment with Laravel Sail
+
+Ensure that **Docker Desktop** is running, and then start the Laravel Sail development environment:
+
+`vendor/sail up`
+
+This will start all necessary Docker containers for your application, and you can access it locally.
+
+### 5. Run Migrations
 
 Set up your database by running Laravel migrations:
 
@@ -52,14 +60,6 @@ Set up your database by running Laravel migrations:
 If you want to seed the database with sample user for the login, you can run:
 
 `php artisan db:seed`
-
-### 5. Start the Development Environment with Laravel Sail
-
-Ensure that **Docker Desktop** is running, and then start the Laravel Sail development environment:
-
-`vendor/sail up`
-
-This will start all necessary Docker containers for your application, and you can access it locally.
 
 ----------
 
@@ -84,7 +84,6 @@ This will start all necessary Docker containers for your application, and you ca
     "timestamp": "2015-10-26T12:00:00Z"
     }
     }`
-
 
 ----------
 
@@ -154,6 +153,7 @@ Make sure to set these environment variables in your `.env` file:
 ----------
 
 
+
 ## 📘 How Does This Work?
 
 This project demonstrates the use of **Gemini AI** to interact with a **structured dataset** (books, in this case). The system leverages advanced technologies to interpret **natural language queries** and deliver relevant, human-like responses.
@@ -169,6 +169,13 @@ We implemented **Gemini AI's function calling** to handle structured queries. Wh
 
 -   **Cost-Efficiency**: By using concise, predefined responses, we optimize token usage and reduce API costs.
 -   **Predictability**: The returned information is precise and contextually relevant, minimizing unexpected results.
+
+#### 🧠 Token Usage Optimization
+
+To further optimize token usage, the results from `findBooks()` function calls are not re-processed with Gemini AI to return a natural language answer. Additionally, these results are not saved in the conversation history (context). This design choice helps in limiting the token usage under the **Gemini AI free tier**. However, for production:
+
+-   **Result Optimization**: Responses can be re-prompted to **Gemini AI** for a more natural language refinement.
+-   **Efficient Context Management**: Proper history context handling should be implemented to balance conversational continuity with cost efficiency.
 
 This setup makes **Gemini AI** an effective bridge between human-like conversation and structured datasets, maintaining balance between **dynamic interactivity** and **practical cost management**.
 
@@ -196,6 +203,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://opens
 
 ----------
 
-### 🌟 Thank you for checking out this project! Feel free to contribute, raise issues, or improve the code. Let’s make data exploration more engaging with **AI**! 🚀
+### 🌟 Thank you for checking out this project! Feel free to contribute, raise issues, fix or improve the code. Let’s make data exploration more engaging with **AI**! 🚀
 
 ----------

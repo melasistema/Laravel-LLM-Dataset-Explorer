@@ -149,7 +149,7 @@ class ChatBotService
                 }
 
                 // Detect intent based on query keywords
-                $intent = $this->detectIntent($query);
+                $intent = $this->bookService->detectBookIntent($query);
 
                 if ($intent === 'find' && $functionCall['name'] === 'findBooks') {
                     // passing the bookService to the findBooks method to not save history
@@ -170,35 +170,6 @@ class ChatBotService
 
         Log::error('Gemini API error: ' . $response->status() . ' - ' . $response->body());
         return 'An error occurred while processing your query.';
-    }
-
-    /**
-     * Detect intent of the query: 'find', 'count', or 'general_info'.
-     *
-     * @param string $query
-     * @return string
-     */
-    private function detectIntent(string $query): string
-    {
-        $queryLower = strtolower(trim($query));
-
-        // Check for "general information" queries
-        if (preg_match('/\b(which books do you have|what books are available|tell me about your books)\b/', $queryLower)) {
-            return 'general_info';
-        }
-
-        // Check for counting intent
-        if (preg_match('/\bhow many\b|\bcount\b/', $queryLower)) {
-            return 'count';
-        }
-
-        // Check for finding intent
-        if (preg_match('/\blist\b|\bshow\b|\bfind\b|\bwhat are\b|\bwhich\b/', $queryLower)) {
-            return 'find';
-        }
-
-        // Default to 'general_info' if no specific keywords are detected
-        return 'find';
     }
 
     /**
