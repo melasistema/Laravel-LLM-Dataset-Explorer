@@ -174,16 +174,19 @@ This setup makes **Gemini AI** an effective bridge between human-like conversati
 
 ----------
 
+
 ### ⚠️ Important: Not for Production Use
 
 This project is a **proof of concept** and a **study prototype**. While it showcases the potential of **LLMs** in dataset interaction, it is not optimized for production use.
 
-#### Areas for Improvement in Production:
+#### Key Considerations:
 
-1.  **Database Integration**: Incorporate Laravel's database system and **ElasticSearch** for robust and scalable querying.
+1.  **Database Integration**: Replace the JSON-based dataset with Laravel's database system and **ElasticSearch** for robust and scalable querying.
 2.  **Caching Mechanisms**: Use caching to optimize response times and reduce computational costs.
-3.  **Enhanced Token Optimization**: Further refine function design for highly cost-efficient API usage.
-4.  **Security Measures**: Implement strong authentication and request validation mechanisms.
+3.  **Optimized Context Management**: Currently, the results from `findBooks()` are **not saved** in the conversation context history. This design avoids rapid consumption of tokens under the **Gemini AI free tier**. However, for production:
+    -   **Result Optimization**: Responses can be re-prompted to **Gemini AI** for a more natural language refinement.
+    -   **Efficient Context Management**: Proper history context handling should be implemented to balance conversational continuity with cost efficiency.
+4.  **Security Measures**: Implement strong authentication, request validation, and data sanitization mechanisms.
 
 > **🚀 This project serves as a valuable starting point** for exploring how conversational AI can interact with structured datasets. Use it as a foundation to build a production-ready solution tailored to your needs.
 
