@@ -121,11 +121,11 @@ If you want to seed the database with sample user for the login, you can run:
 
 ### `app/Services/ChatBotService.php`
 
-Handles user queries and interacts with **Gemini AI**. It processes requests and uses the **CoreNLP** and **BookService** to return meaningful responses.
+Handles user queries and interacts with **Gemini AI**. It processes requests and uses the **BookService** to return dataset interaction responses.
 
 ### `app/Services/BookService.php`
 
-Manages the dataset of books and handles the filtering and retrieval of data based on user queries, such as "Italian books" or "books from the 14th century".
+Manages the dataset of books, query intent with **CoreNLP** and handles the filtering and retrieval of data based on user queries, such as "Italian books" or "books from the 14th century".
 
 ### `app/Http/Controllers/Api/ChatBotController.php`
 

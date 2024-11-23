@@ -16,10 +16,9 @@ class ChatBotService
     protected string $chatBotInstructions = '';
     protected array $functionSchema = [];
     protected array $functionConfig = [];
-    protected CoreNlpService $coreNlpService;
     protected BookService $bookService;
 
-    public function __construct(CoreNlpService $coreNlpService, BookService $bookService)
+    public function __construct(BookService $bookService)
     {
         $this->apiUrl = config('gemini.base_url');
         $this->apiKey = config('gemini.api_key');
@@ -27,7 +26,6 @@ class ChatBotService
         $this->functionSchema = config('chatBot.function_schema');
         $this->functionConfig = config('chatBot.function_config');
         $this->chatBotInstructions = config('chatBot.instructions');
-        $this->coreNlpService = $coreNlpService;
         $this->bookService = $bookService;
     }
 
